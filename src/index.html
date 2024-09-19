@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- jQuery e jQuery UI -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+        crossorigin="anonymous"></script>
+
+
+
+
+
+    <script src="web_components.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <input-text label="Nome" id="myInput" required disabled value="John Doe"></input-text>
+        </div>
+        <div class="row">
+            <input-cep label="CEP" id="cepInput"></input-cep>
+        </div>
+
+        <div class="row">
+            <input-checkbox id="myCheckbox" label="Checkbox" />
+        </div>
+        <div class="row">
+            <input-datepicker id="myDatepicker" label="Data"></input-datepicker>
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(() => {
+            $('#myCheckbox').on('change', () => {
+                // const checkbox = $('#myCheckbox')[0].inputElement;
+                console.log('checked', $('#myCheckbox').prop('checked'));
+            })
+            $('#mybutton').on('click', () => {
+                $('#myInput').removeAttr('disabled', false);
+                $('#myInput').removeAttr('required', false);
+            });
+        });
+    </script>
+</body>
+
+</html>

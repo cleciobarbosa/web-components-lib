@@ -1,4 +1,4 @@
-import '../src/InputText'; // Ajuste o caminho conforme necessário
+import '../src/web_components'; // Ajuste o caminho conforme necessário
 
 describe('InputText', () => {
     let component;
