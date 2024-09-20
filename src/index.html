@@ -17,16 +17,18 @@
         crossorigin="anonymous"></script>
 
 
-
-
-
-    <script src="web_components.js" defer></script>
+    <!-- <script src="web_components.js" defer></script> -->
+    <script src="input_text.js" defer></script>
 </head>
 
 <body>
     <div class="container">
         <div class="row">
             <input-text label="Nome" id="myInput" required disabled value="John Doe"></input-text>
+            <div class="input-group">
+                <button class="btn btn-primary" id="mybutton">Habilitar</button>
+                <button class="btn btn-primary mr-10" id="mybutton2">Desabilitar</button>
+            </div>
         </div>
         <div class="row">
             <input-cep label="CEP" id="cepInput"></input-cep>
@@ -48,8 +50,14 @@
                 console.log('checked', $('#myCheckbox').prop('checked'));
             })
             $('#mybutton').on('click', () => {
-                $('#myInput').removeAttr('disabled', false);
-                $('#myInput').removeAttr('required', false);
+                $('#myInput').prop('disabled', false);
+                
+                $('#myInput').prop('required', false);
+            });
+            $('#mybutton2').on('click', () => {
+                $('#myInput').prop('disabled', true);
+                
+                $('#myInput').prop('required', false);
             });
         });
     </script>
