@@ -23,12 +23,17 @@ class InputText extends HTMLElement {
         this.inputElement = this.querySelector('input');
         this.inputElement.value = this.getAttribute("value") || "";
 
-        // Sincronizar maxlength, disabled e required no momento da conexão
+        // Sincronizar maxlength, disabled e required
         if (this.maxlength) {
             this.inputElement.setAttribute('maxlength', this.maxlength);
         }
         this.inputElement.disabled = this._disabled;
         this.inputElement.required = this._required;
+
+        // Adiciona listener para disparar evento 'valueChanged' quando o valor muda
+        this.inputElement.addEventListener('input', (event) => {
+            this._dispatchValueChanged(event.target.value);
+        });
 
         // Armazena as classes iniciais do input
         this.initialClasses = [...this.inputElement.classList];
@@ -72,6 +77,16 @@ class InputText extends HTMLElement {
                 this.inputElement.classList.remove(className);
             }
         });
+    }
+
+    // Método privado para disparar o evento customizado 'valueChanged'
+    _dispatchValueChanged(newValue) {
+        const valueChangedEvent = new CustomEvent('valueChanged', {
+            detail: { value: newValue }, // Inclui o novo valor no detalhe do evento
+            bubbles: true,              // Permite que o evento se propague no DOM
+            composed: true              // Permite que o evento passe pela Shadow DOM, se aplicável
+        });
+        this.dispatchEvent(valueChangedEvent);
     }
 
     // Getter e setter para o atributo 'disabled'
@@ -169,7 +184,7 @@ class InputText extends HTMLElement {
     set value(val) {
         if (this.inputElement) {
             this.inputElement.value = val;
-            this.inputElement.dispatchEvent(new Event('input')); // Disparar evento de input
+            this._dispatchValueChanged(val); // Disparar evento de mudança de valor
         }
     }
 }

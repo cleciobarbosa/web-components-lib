@@ -50,4 +50,51 @@ describe('InputText', () => {
             expect(input).toHaveClass('new-class');
         }, 0);
     });
+
+    it('deve emitir o evento valueChanged quando o valor mudar', () => {
+        const input = component.querySelector('input');
+        const newValue = 'Alice Doe';
+
+        // Cria um espião para o evento valueChanged
+        const valueChangedSpy = jest.fn();
+        component.addEventListener('valueChanged', valueChangedSpy);
+
+        // Altera o valor programaticamente
+        component.value = newValue;
+
+        // Verifica se o evento foi disparado
+        expect(valueChangedSpy).toHaveBeenCalledTimes(1);
+        
+        // Verifica se o evento contém o novo valor
+        expect(valueChangedSpy).toHaveBeenCalledWith(expect.objectContaining({
+            detail: { value: newValue }
+        }));
+
+        // Verifica se o valor foi alterado no input
+        expect(input.value).toBe(newValue);
+    });
+
+    it('deve disparar valueChanged quando o usuário digitar no input', () => {
+        const input = component.querySelector('input');
+        const newValue = 'Bob Doe';
+
+        // Cria um espião para o evento valueChanged
+        const valueChangedSpy = jest.fn();
+        component.addEventListener('valueChanged', valueChangedSpy);
+
+        // Simula uma digitação no input
+        input.value = newValue;
+        input.dispatchEvent(new Event('input')); // Dispara o evento de input
+
+        // Verifica se o evento foi disparado
+        expect(valueChangedSpy).toHaveBeenCalledTimes(1);
+        
+        // Verifica se o evento contém o novo valor
+        expect(valueChangedSpy).toHaveBeenCalledWith(expect.objectContaining({
+            detail: { value: newValue }
+        }));
+
+        // Verifica se o valor foi alterado no input
+        expect(input.value).toBe(newValue);
+    });
 });
