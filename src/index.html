@@ -15,28 +15,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
-        <style>
-            .bd-placeholder-img {
-              font-size: 1.125rem;
-              text-anchor: middle;
-              -webkit-user-select: none;
-              -moz-user-select: none;
-              user-select: none;
-            }
-        
-            @media (min-width: 768px) {
-              .bd-placeholder-img-lg {
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
                 font-size: 3.5rem;
-              }
             }
-        
-            .input-validate {
-              border-bottom-color: red !important;
-            }
-          </style>
+        }
+
+        .input-validate {
+            border-bottom-color: red !important;
+        }
+    </style>
 
     <!-- <script src="web_components.js" defer></script> -->
     <script src="input_text.js" defer></script>
+    <script src="input_checkbox.js" defer></script>
+    <script src="input_badge.js" defer></script>
 </head>
 
 <body>
@@ -51,11 +53,33 @@
             </div>
         </div>
         <div class="row">
-            <!-- <input-cep label="CEP" id="cepInput"></input-cep> -->
+            <div class="card">
+                <div class="card-body">
+
+                    <!-- Checkbox customizado -->
+                    <input-checkbox  id="checkcTermos"
+                    label="Aceito os termos e condições" id="termsCheckbox"></input-checkbox>
+                    <button id="checkStatusButton" class="btn btn-primary mt-3">Verificar Status</button>
+                </div>
+            </div>
         </div>
 
         <div class="row">
-            <!-- <input-checkbox id="myCheckbox" label="Checkbox" /> -->
+            <div class="container mt-5">
+                <!-- Badge simples -->
+                <bohm-badge text="Success" variant="success"></bohm-badge>
+        
+                <!-- Badge simples -->
+                <bohm-badge text="Danger" variant="danger"></bohm-badge>
+
+                <!-- Badge simples -->
+                <bohm-badge text="Secondary" variant="secondary"></bohm-badge>
+
+                <!-- Badge pill -->
+                <bohm-badge text="Importante" variant="danger" pill></bohm-badge>
+        
+                <!-- Botão para alterar o badge -->
+            </div>
         </div>
         <div class="row">
             <!-- <input-datepicker id="myDatepicker" label="Data"></input-datepicker> -->
@@ -71,17 +95,22 @@
             })
             $('#mybutton').on('click', () => {
                 $('#myInput').prop('disabled', false);
-                
+
                 $('#myInput').prop('required', false);
             });
             $('#mybutton2').on('click', () => {
                 $('#myInput').prop('disabled', true);
-                
+
                 $('#myInput').prop('required', false);
             });
 
-            $('#validar').on('click', function(){
+            $('#validar').on('click', function () {
                 $('#myInput').addClass('input-validate');
+            })
+
+            $('#checkStatusButton').on('click', function(){
+                console.log('Checked', $('#checkcTermos').prop('checked'))
+                console.log('val', $('#checkcTermos').val())
             })
         });
     </script>
